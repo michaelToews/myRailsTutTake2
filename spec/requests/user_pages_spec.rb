@@ -67,6 +67,12 @@ describe "UserPages" do
   end
 
   describe "signup page" do
+    # describe "when user is already signed in" do
+    #   before do
+    #     sign_in(user)
+    #     visit signup_path
+    #   end
+    # end
     before { visit signup_path }
 
     it { should have_selector('h1',    text: 'Sign up') }
