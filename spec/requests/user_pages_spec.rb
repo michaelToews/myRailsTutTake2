@@ -67,12 +67,6 @@ describe "UserPages" do
   end
 
   describe "signup page" do
-    # describe "when user is already signed in" do
-    #   before do
-    #     sign_in(user)
-    #     visit signup_path
-    #   end
-    # end
     before { visit signup_path }
 
     it { should have_selector('h1',    text: 'Sign up') }
@@ -103,7 +97,7 @@ describe "UserPages" do
         before { click_button submit }
 
         it { should have_selector('title', text: 'Sign up') }
-        # it { should have_selector('error') }
+        it { should have_error_message('error') }
       end
     end
 
@@ -123,9 +117,11 @@ describe "UserPages" do
         before { click_button submit }
         let(:user) { User.find_by_email('user@example.com') }
 
-        it { should have_selector('title', text: user.name) }
-        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
-        it { should have_link('Sign out') }
+        describe "the first login" do
+          it { should have_selector('title', text: user.name) }
+          it { should have_selector('div.alert.alert-success', text: 'Welcome') }
+          it { should have_link('Sign out') }
+        end
       end
     end
   end
