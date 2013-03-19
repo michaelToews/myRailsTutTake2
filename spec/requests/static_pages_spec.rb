@@ -33,6 +33,22 @@ describe "Static Pages" do
           page.should have_selector("li##{item.id}", text: item.content)
         end
       end
+
+      # describe "the user's micropost count" do
+      #   describe "with > 1 micropost" do
+      #     it { should have_selector('span', text: "#{user.microposts.count} microposts") }
+      #   end
+
+      #   describe "with 1 micropost" do
+      #     before { user.microposts.first.destroy }
+      #     it { should have_selector('span', text: "#{user.microposts.count} micropost") }
+      #   end
+
+      #   describe "with 0 microposts" do
+      #     before { user.microposts.first.destroy }
+      #     it { should have_selector('span', text: "0 microposts") }
+      #   end
+      # end
     end
   end
 
