@@ -95,6 +95,7 @@ describe "UserPages" do
           it { should have_link("delete") }
         end
 
+        # Ch 10 Exercise 4 
         describe "not belonging to the signed in user" do
           let(:other_user) { FactoryGirl.create(:user) }
           let!(:m3)        { FactoryGirl.create(:micropost, user: other_user, content: "other_post") }
