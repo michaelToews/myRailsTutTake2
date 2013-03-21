@@ -22,33 +22,26 @@ describe "Static Pages" do
     describe "for signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
       before do
-        FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
-        FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+        31.times { FactoryGirl.create(:micropost, user: user) }
         sign_in user
         visit root_path
       end
 
+      after { user.microposts.delete_all }
+
       it "should render the user's feed" do
-        user.feed.each do |item|
+        user.feed[0..29].each do |item|
           page.should have_selector("li##{item.id}", text: item.content)
         end
       end
 
-      # describe "the user's micropost count" do
-      #   describe "with > 1 micropost" do
-      #     it { should have_selector('span', text: "#{user.microposts.count} microposts") }
-      #   end
+      it "should have the correctly pluralized number of microposts" do
+        page.should have_selector('span', text: "31 microposts")
+      end
 
-      #   describe "with 1 micropost" do
-      #     before { user.microposts.first.destroy }
-      #     it { should have_selector('span', text: "#{user.microposts.count} micropost") }
-      #   end
-
-      #   describe "with 0 microposts" do
-      #     before { user.microposts.first.destroy }
-      #     it { should have_selector('span', text: "0 microposts") }
-      #   end
-      # end
+      it "should paginate after 30" do
+        page.should have_selector('div.pagination')
+      end
     end
   end
 
