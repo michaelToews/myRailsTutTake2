@@ -207,6 +207,13 @@ footer {
 
 /* miscellaneous */
 
+// Micropost character countdown
+.countdown {
+  display: inline;
+  color: $grayLight;
+  float: right;
+}
+
 .debug_dump {
   clear: both;
   float: left;
